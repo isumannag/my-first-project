@@ -1,0 +1,24 @@
+.main-container {
+    min-width: 1330px;
+    a {
+        padding: 10px;
+        background: #eee;
+        text-decoration: none;
+        color: black;
+        display: inline-table;
+        height: 32px;
+        text-align: center;
+        font-size: 14px;
+        &:hover{
+            font-weight: bold;
+            text-decoration: underline;
+        }
+    }
+    .outer-outlet {
+        padding: 70px;
+        border: 1px solid red;
+        background: beige;
+        font-family: arial;
+        min-height: 400px;
+    }
+}
