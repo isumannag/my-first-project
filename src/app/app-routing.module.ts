@@ -12,7 +12,8 @@ import { ChildHome, ChildOther, NestedRouterComponent } from './components/Route
 import { ParamPassingComponent, ParamPassingRouterComponent } from './components/Router/paramPassingRouther.component';
 import { AuxComponent, AuxilaryRouterComponent } from './components/Router/auxilaryRouther.component';
 const routes: Routes = [
-  {path: '', component: HomeComponent},
+  {path: '', redirectTo: 'home', pathMatch: 'full'},
+  {path: 'home', component: HomeComponent},
   {path: 'nestedComponent', component: ParentComponent},
   {path: 'structDirective', component: SrtucturalDirectiveComponent},
   {path: 'attrDirective', component: AttrDirectiveComponent},
@@ -36,9 +37,11 @@ const routes: Routes = [
    children: [
     {path:'', component: ChildHome},
     {path:'item', component: ChildOther},
-    {path:'auxilary', component: AuxComponent, outlet: 'sidebar'},
-    
+    {path:'auxilary', component: AuxComponent, outlet: 'sidebar'}
    ]
+  },
+  {path: 'lazyLoading',
+   loadChildren: () => import('./components/LazyLoading/lazyLoading.module').then(m => m.LazyLoadingModule)
   }
 ];
 
