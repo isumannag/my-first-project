@@ -10,9 +10,10 @@ import { DirectiveModule } from './components/Directives/directive.module';
 import { OthersModule } from './components/Others/others.module';
 import { MyFormModule } from './components/Forms/from.module';
 import { RouterExampleModule } from './components/Router/routerExample.module';
+import { PageNotFoundComponent } from './page-not-found/page-not-found.component';
 
 @NgModule({
-  declarations: [AppComponent],
+  declarations: [AppComponent, PageNotFoundComponent],
   imports: [
     BrowserModule,
     AppRoutingModule,

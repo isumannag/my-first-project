@@ -2,14 +2,24 @@ import { Component } from '@angular/core';
 
 @Component({
   selector: 'app-home',
-  template: `<h1>Welcome to the world of {{name}}!!</h1>`,
-  styles: [`h1{
-    color: green;
-    text-align: center;
+  template: `
+  <p><b>Below are the list of things we have created using {{name}}:</b></p>
+  <p>1. ng new my-first-project <br>
+     2. ng g c Home <br>
+     3. npm install bootstrap --save <br>
+     is the commend to include bootstrap in Angular application. Also we need to add below code in <b>angular.json</b>.<br>
+     "styles": [
+      "node_modules/bootstrap/dist/css/bootstrap.min.css",
+      "src/styles.css"
+      ]
+  </p>
+
+  `,
+  styles: [`b{
+    color: blue;
     margin-top: 150px;
-    font-style: italic;
   }`]
 })
 export class HomeComponent {
-  name = 'Angular';
+  name = 'CLI commend';
 }

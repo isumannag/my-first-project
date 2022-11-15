@@ -11,7 +11,7 @@ import { FormBuilder, FormControl, FormGroup, Validators } from "@angular/forms"
 
             <label> Passowrd </label>
             <input type="password" name="passowrd" [formControl]="password">
-            <button type="submit" [disabled]="!myLoginForm.valid"> Sign Up</button>
+            <button type="submit" [disabled]="!myLoginForm.valid" class="btn btn-primary"> Sign Up</button>
             <div [hidden]="password.untouched">
                 <div [hidden]="!password.hasError('required')">Passowrd Required</div>
                 <div [hidden]="!password.hasError('needExclamation')">Your Password must have an exclamation mark !</div>

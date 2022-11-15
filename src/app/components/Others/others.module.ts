@@ -3,15 +3,19 @@ import { CommonModule } from '@angular/common';
 import { FormattedPipeExample, PipeComponent } from './pipe.component';
 import { ServiceInvokedComponent } from './serviceInvoke.component';
 import { ExampleService } from 'src/app/service/my.service';
+import { FormsModule } from '@angular/forms';
+import { BindingComponent } from './binding.component';
 
 @NgModule({
   declarations: [
     PipeComponent, 
     FormattedPipeExample,
-    ServiceInvokedComponent
+    ServiceInvokedComponent,
+    BindingComponent
   ],
   imports: [
-    CommonModule
+    CommonModule,
+    FormsModule
   ],
   providers: [ExampleService]
 })

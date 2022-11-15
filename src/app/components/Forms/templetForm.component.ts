@@ -10,7 +10,7 @@ import { NgForm } from "@angular/forms";
 
             <label>Password</label>
             <input type="password" name="password" ngModel>
-            <button type="submit">Sign Up</button>
+            <button type="submit" class="btn btn-primary">Sign Up</button>
         </form>
     ` 
 })

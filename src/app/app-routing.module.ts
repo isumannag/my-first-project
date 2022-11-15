@@ -11,6 +11,8 @@ import { TempletFromComponent } from './components/Forms/templetForm.component';
 import { ChildHome, ChildOther, NestedRouterComponent } from './components/Router/nestedRouther.component';
 import { ParamPassingComponent, ParamPassingRouterComponent } from './components/Router/paramPassingRouther.component';
 import { AuxComponent, AuxilaryRouterComponent } from './components/Router/auxilaryRouther.component';
+import { PageNotFoundComponent } from './page-not-found/page-not-found.component';
+import { BindingComponent } from './components/Others/binding.component';
 const routes: Routes = [
   {path: '', redirectTo: 'home', pathMatch: 'full'},
   {path: 'home', component: HomeComponent},
@@ -18,6 +20,7 @@ const routes: Routes = [
   {path: 'structDirective', component: SrtucturalDirectiveComponent},
   {path: 'attrDirective', component: AttrDirectiveComponent},
   {path:'pipe', component: PipeComponent},
+  {path:'binding', component: BindingComponent},  
   {path:'service', component: ServiceInvokedComponent},
   {path:'templetForm', component: TempletFromComponent},
   {path:'reactiveForm', component: ReactiveFromComponent},
@@ -40,9 +43,10 @@ const routes: Routes = [
     {path:'auxilary', component: AuxComponent, outlet: 'sidebar'}
    ]
   },
-  {path: 'lazyLoading',
+  {path: 'lazy-loading-path',
    loadChildren: () => import('./components/LazyLoading/lazyLoading.module').then(m => m.LazyLoadingModule)
-  }
+  },
+  {path: '**', component: PageNotFoundComponent}
 ];
 
 @NgModule({

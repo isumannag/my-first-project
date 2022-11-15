@@ -14,10 +14,10 @@ import { Component } from '@angular/core';
       <ul><li *ngFor="let item of items; let i=index"> Index {{i}} item is {{item}}</li></ul><br>
 
     <h3> Angular ngSwitch demo </h3>
-      <button (click)="value=1"> Select - 1 </button>
-      <button (click)="value=2"> Select - 2 </button>
-      <button (click)="value=3"> Select - 3 </button>
-      <button (click)="value=156+4"> Default </button>
+      <button (click)="value=1" type="button" class="btn btn-primary"> Select - 1 </button>
+      <button (click)="value=2" type="button" class="btn btn-primary"> Select - 2 </button>
+      <button (click)="value=3" type="button" class="btn btn-primary"> Select - 3 </button>
+      <button (click)="value=156+4" type="button" class="btn btn-primary"> Default </button>
       <div [ngSwitch]="value">
         <div *ngSwitchCase="1">A. Template - Value={{value}}</div>
         <div *ngSwitchCase="2">B. Template - Value={{value}}</div>

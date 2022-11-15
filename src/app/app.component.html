@@ -1,17 +1,19 @@
 <div class="main-container">
-    <a routerLink="/home">Home</a>
-    <a routerLink="/nestedComponent">Nested<br>Components</a>
-    <a routerLink="/structDirective">Structural<br>Directives</a>
-    <a routerLink="/attrDirective">Attribute<br>Directives</a>
-    <a routerLink="/pipe">Pipe</a>
-    <a routerLink="/service">Service</a>
-    <a routerLink="/templetForm">TempletForm</a>
-    <a routerLink="/reactiveForm">ReactiveForm</a>
-    <a routerLink="/nestedRouter">NestedRouter</a>
-    <a routerLink="/paramPassingRouter">ParamPassingRouter</a>
-    <a routerLink="/auxilaryRouter">AuxilaryRouter</a>
-    <a routerLink="/lazyLoading">LazyLoading</a>
-
+    <ul class="nav nav-tabs">
+        <li class="nav-item"><a class="nav-link" routerLink="/home" routerLinkActive="active">Home<br>Comp</a></li>
+        <li class="nav-item"><a class="nav-link" routerLink="/nestedComponent" routerLinkActive="active">Nested<br>Comp</a></li>
+        <li class="nav-item"><a class="nav-link" routerLink="/binding" routerLinkActive="active">Binding<br>Comp</a></li>
+        <li class="nav-item"><a class="nav-link" routerLink="/structDirective" routerLinkActive="active">Structural<br>Directives</a></li>
+        <li class="nav-item"><a class="nav-link" routerLink="/attrDirective" routerLinkActive="active">Attribute<br>Directives</a></li>
+        <li class="nav-item"><a class="nav-link" routerLink="/pipe" routerLinkActive="active">Pipe<br>Comp</a></li>
+        <li class="nav-item"><a class="nav-link" routerLink="/service" routerLinkActive="active">Service<br>Comp</a></li>
+        <li class="nav-item"><a class="nav-link" routerLink="/templetForm" routerLinkActive="active">Templet<br>Form</a></li>
+        <li class="nav-item"><a class="nav-link" routerLink="/reactiveForm" routerLinkActive="active">Reactive<br>Form</a></li>
+        <li class="nav-item"><a class="nav-link" routerLink="/nestedRouter" routerLinkActive="active">Nested<br>Router</a></li>
+        <li class="nav-item"><a class="nav-link" routerLink="/paramPassingRouter" routerLinkActive="active">Param<br>Router</a></li>
+        <li class="nav-item"><a class="nav-link" routerLink="/auxilaryRouter" routerLinkActive="active">Auxilary<br>Router</a></li>
+        <li class="nav-item"><a class="nav-link" routerLink="/lazy-loading-path" routerLinkActive="active">Lazy<br>Loading</a></li>
+    </ul>
     <div class="outer-outlet">
         <router-outlet></router-outlet>
     </div>
