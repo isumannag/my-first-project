@@ -5,9 +5,9 @@ import { ChildComponent } from './child.component';
   template: `<div class='main'>
               <h1>I'm parent component</h1>
               <app-child-selector 
-                [parentValue]='messagePassing'
+                [parentValueAlias]='messagePassing'
                 (callParent)="getMsgFromBaby($event)"
-                ></app-child-selector>
+                >ng-contenct example</app-child-selector>
                 <p>{{babyMessageFromOutput}}</p>
                 <p>{{babyMessageFromView}}</p>
              </div>

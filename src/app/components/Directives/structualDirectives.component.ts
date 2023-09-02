@@ -1,11 +1,13 @@
-import { Component } from '@angular/core';
+import { Component, Directive, Input, TemplateRef, ViewContainerRef } from '@angular/core';
 
 @Component({
   selector: 'app-myapp',
   template: `
     <h3> Angular ngIf demo </h3>
       <p *ngIf="isValid"> isValid variable value is 'true' </p>
-      <p *ngIf="!isValid"> isValid variable value is 'false' </p>
+      <ng-template [ngIf]="!isValid">
+        <p> isValid variable value is 'false' (behind the *ngIf) </p>
+      </ng-template>
 
       <div *ngIf="isValid; else else_content"> "If" content here </div>
       <ng-template #else_content> "Else" content here </ng-template><br>
@@ -23,12 +25,33 @@ import { Component } from '@angular/core';
         <div *ngSwitchCase="2">B. Template - Value={{value}}</div>
         <div *ngSwitchCase="3">C. Template - Value={{value}}</div>
         <div *ngSwitchDefault>Default Template - Value not equals to 1, 2, 3</div>
-      </div>
+      </div><br>
+
+    <h3> My Custor Structural Directive </h3>
+      <p *appUnless="myValid"> my custom condition </p>
 
   `
 })
 export class SrtucturalDirectiveComponent {
   value = 0;
   isValid = false;
+  myValid = true;
   items = ['First', 'Second', 'Third'];
+}
+
+// Custom structural Directive
+@Directive({
+  selector: '[appUnless]'
+})
+export class MyConditionDirective{
+  constructor(private tmplRef: TemplateRef<any>, private vcRef: ViewContainerRef){}
+
+  @Input() set appUnless(condition: boolean){
+    condition
+    if(condition){
+      this.vcRef.createEmbeddedView(this.tmplRef);
+    } else {
+      this.vcRef.clear();
+    }
+  }
 }
