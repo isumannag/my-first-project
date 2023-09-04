@@ -33,7 +33,7 @@ const routes: Routes = [
   {path:'paramPassingRouter', component: ParamPassingRouterComponent,
    children: [
     {path:'', component: ChildHome},
-    {path:'item/:id', component: ParamPassingComponent}
+    {path:'item/:id/:name', component: ParamPassingComponent}
    ]
   },
   {path:'auxilaryRouter', component: AuxilaryRouterComponent,
