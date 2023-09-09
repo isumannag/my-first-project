@@ -13,6 +13,8 @@ import { ParamPassingComponent, ParamPassingRouterComponent } from './components
 import { AuxComponent, AuxilaryRouterComponent } from './components/Router/auxilaryRouther.component';
 import { PageNotFoundComponent } from './page-not-found/page-not-found.component';
 import { BindingComponent } from './components/Others/binding.component';
+import { AuthGuard } from './guards/auth-guard.service';
+import { CanDeactivateGuard } from './guards/can-deactivate-guard.service';
 const routes: Routes = [
   {path: '', redirectTo: 'home', pathMatch: 'full'},
   {path: 'home', component: HomeComponent},
@@ -21,7 +23,7 @@ const routes: Routes = [
   {path: 'attrDirective', component: AttrDirectiveComponent},
   {path:'pipe', component: PipeComponent},
   {path:'binding', component: BindingComponent},  
-  {path:'service', component: ServiceInvokedComponent},
+  {path:'service', component: ServiceInvokedComponent, canDeactivate: [CanDeactivateGuard]},
   {path:'templetForm', component: TempletFromComponent},
   {path:'reactiveForm', component: ReactiveFromComponent},
   {path:'nestedRouter', component: NestedRouterComponent,
@@ -36,7 +38,10 @@ const routes: Routes = [
     {path:'item/:id/:name', component: ParamPassingComponent}
    ]
   },
-  {path:'auxilaryRouter', component: AuxilaryRouterComponent,
+  {path:'auxilaryRouter', 
+   component: AuxilaryRouterComponent, 
+   // canActivate: [AuthGuard],
+   canActivateChild: [AuthGuard],
    children: [
     {path:'', component: ChildHome},
     {path:'item', component: ChildOther},
@@ -46,7 +51,7 @@ const routes: Routes = [
   {path: 'lazy-loading-path',
    loadChildren: () => import('./components/LazyLoading/lazyLoading.module').then(m => m.LazyLoadingModule)
   },
-  {path: '**', component: PageNotFoundComponent}
+  {path: '**', component: PageNotFoundComponent, data: {message: 'Page not found'}}
 ];
 
 @NgModule({

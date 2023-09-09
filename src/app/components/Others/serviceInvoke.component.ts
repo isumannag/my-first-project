@@ -1,13 +1,20 @@
 import { Component, inject, OnInit } from "@angular/core";
+import { ActivatedRoute, Router } from "@angular/router";
+import { Observable } from "rxjs";
+import { CanComponentDeactivate } from "src/app/guards/can-deactivate-guard.service";
 import { ExampleService } from "src/app/service/my.service";
 
 @Component({
     selector: 'app-myapp',
-    template: `Data came from service: {{updatedData}}`
+    template: `
+        <p>Data came from service: {{updatedData}}</p>
+    `
 })
-export class ServiceInvokedComponent implements OnInit{
+export class ServiceInvokedComponent implements OnInit, CanComponentDeactivate{    
     public updatedData = {};
-    constructor(private myService: ExampleService){}
+    constructor(private myService: ExampleService, private route: Router, private actvRoute: ActivatedRoute){}
+
+    public wantToLeaveThePage: boolean = false;
 
     /* Alternative approach to DI using "inject" */
     // private myService: ExampleService;
@@ -19,4 +26,17 @@ export class ServiceInvokedComponent implements OnInit{
             errorData => console.log('Service Error!: ', errorData)
         );
     }
+
+    onChangeBtn(){
+        this.wantToLeaveThePage = true;
+        this.route.navigate(["../"], {relativeTo: this.actvRoute});
+    }
+
+    canDeactivate():boolean | Observable<boolean> | Promise<boolean> {
+        if(!this.wantToLeaveThePage){
+            return confirm('Do You Want to Leave the Page?');
+        } else {
+            return true;
+        }
+    };
 }

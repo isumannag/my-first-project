@@ -43,6 +43,11 @@ import { Router } from "@angular/router";
 export class NestedRouterComponent{
     constructor(private routerVar: Router){}
     goHome(){
-        this.routerVar.navigate(['/home']);
+        this.routerVar.navigate(
+            ['/home'],
+            {   queryParams: {from: 'nestedComp'}, 
+                fragment: 'loading'
+            }
+        );
     }
 }
