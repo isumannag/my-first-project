@@ -1,4 +1,5 @@
-import { AfterViewInit, ChangeDetectorRef, Component, ViewChild } from '@angular/core';
+import { AfterViewInit, ChangeDetectorRef, Component, OnInit, ViewChild } from '@angular/core';
+import { ActivatedRoute } from '@angular/router';
 import { ChildComponent } from './child.component';
 @Component({
   selector: 'app-parent-selector',
@@ -9,12 +10,14 @@ import { ChildComponent } from './child.component';
                 (callParent)="getMsgFromBaby($event)"
                 >ng-contenct example</app-child-selector>
                 <p>{{babyMessageFromOutput}}</p>
-                <p>{{babyMessageFromView}}</p>
+                <p>{{babyMessageFromView}}</p><br><br>
+
+                <p>{{myResolverData}} : Data passing through resolver of Router</p>
              </div>
             `,
   styles: [`div.main{border:1px solid; padding: 25px;}`]
 })
-export class ParentComponent implements AfterViewInit{
+export class ParentComponent implements AfterViewInit, OnInit{
   messagePassing = 'Passing data from Parent using @Input!';
 
   babyMessageFromOutput = 'Dummy Now @Output';
@@ -23,12 +26,22 @@ export class ParentComponent implements AfterViewInit{
   }
 
   babyMessageFromView = 'Dummy Now @VeiwChild';
-  constructor(private cdr: ChangeDetectorRef){}
+  constructor(private cdr: ChangeDetectorRef, private actvRoute: ActivatedRoute){}
   @ViewChild(ChildComponent) child?: ChildComponent;
   ngAfterViewInit(): void {   // ngAfterViewInit is to use ViewChild
     if(this.child){
       this.babyMessageFromView = this.child.message2FromChild;
       this.cdr.detectChanges(); // Used to reflect the changes in HTML templet
     }
+  }
+
+  // Resolver example through Router
+  myResolverData: string = '';
+  ngOnInit(): void {
+    this.actvRoute.data.subscribe(
+      data => {
+        this.myResolverData = data['server']['data'];
+      }
+    );
   }
 }

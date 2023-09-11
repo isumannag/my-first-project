@@ -15,17 +15,25 @@ import { PageNotFoundComponent } from './page-not-found/page-not-found.component
 import { BindingComponent } from './components/Others/binding.component';
 import { AuthGuard } from './guards/auth-guard.service';
 import { CanDeactivateGuard } from './guards/can-deactivate-guard.service';
+import { ServerResolver } from './guards/server-resolver.service';
+import { MyAllFormComponent } from './components/Forms/form.component';
+import { TempletFromGroupComponent } from './components/Forms/templetFormGroup.component';
 const routes: Routes = [
   {path: '', redirectTo: 'home', pathMatch: 'full'},
   {path: 'home', component: HomeComponent},
-  {path: 'nestedComponent', component: ParentComponent},
+  {path: 'nestedComponent', component: ParentComponent, resolve: {server: ServerResolver}},
   {path: 'structDirective', component: SrtucturalDirectiveComponent},
   {path: 'attrDirective', component: AttrDirectiveComponent},
   {path:'pipe', component: PipeComponent},
   {path:'binding', component: BindingComponent},  
   {path:'service', component: ServiceInvokedComponent, canDeactivate: [CanDeactivateGuard]},
-  {path:'templetForm', component: TempletFromComponent},
-  {path:'reactiveForm', component: ReactiveFromComponent},
+  {path:'form', component: MyAllFormComponent,
+  children: [
+      {path:'', component: TempletFromComponent},
+      {path:'templetformgroup', component: TempletFromGroupComponent},
+      {path:'reactiveform', component: ReactiveFromComponent}
+    ]
+  },
   {path:'nestedRouter', component: NestedRouterComponent,
    children: [
     {path:'', component: ChildHome},
@@ -55,6 +63,7 @@ const routes: Routes = [
 ];
 
 @NgModule({
+  // imports: [RouterModule.forRoot(routes, {useHash: true})],   This to swith on # in the router url
   imports: [RouterModule.forRoot(routes)],
   exports: [RouterModule]
 })
