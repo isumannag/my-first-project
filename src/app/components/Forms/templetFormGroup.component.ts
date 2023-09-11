@@ -3,7 +3,7 @@ import { NgForm } from "@angular/forms";
 @Component({
     selector: 'app-myapp',
     template: `
-        <h1>Templet Driven Form Example</h1>
+        <h2>Templet Driven Form Example</h2>
         <form #ff='ngForm' (ngSubmit)="registerMyUser()">
             <div ngModelGroup="allDataForm" #gg="ngModelGroup">
                 <label>Email</label>

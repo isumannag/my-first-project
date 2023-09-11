@@ -3,11 +3,13 @@ import { FormBuilder, FormControl, FormGroup, Validators } from "@angular/forms"
 
 @Component({
     selector: 'app-myapp',
+    styles: [`input.ng-invalid.ng-touched {border:1px solid red;}`],
     template: `
-        <h1> Reactive Forms Example </h1>
+        <h2> Reactive Forms Example </h2>
         <form [formGroup]="myLoginForm" (ngSubmit)="login()">
             <label>User Name </label>
-            <input type="text" name="username" formControlName="username">
+            <input type="text" name="username" formControlName="usernameField">
+            <p *ngIf="!myLoginForm.get('usernameField')?.valid">Please enter UserName!</p>
 
             <label> Passowrd </label>
             <input type="password" name="passowrd" [formControl]="password">
@@ -21,16 +23,15 @@ import { FormBuilder, FormControl, FormGroup, Validators } from "@angular/forms"
 })
 export class ReactiveFromComponent{
     constructor(private builder: FormBuilder){}
-    username = new FormControl('');
     password = new FormControl ('', [Validators.required, myCustomCondition]);
     
     myLoginForm: FormGroup = this.builder.group({
-        username: this.username,
+        usernameField: new FormControl('as', Validators.required),
         password: this.password
     });
 
     login(): any{ 
-        alert('Successful! Username: '+this.myLoginForm.value.username+
+        alert('Successful! Username: '+this.myLoginForm.value.usernameField+
               'Password: '+this.myLoginForm.value.password);
     }
 }
