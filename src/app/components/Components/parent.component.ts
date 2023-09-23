@@ -40,7 +40,7 @@ export class ParentComponent implements AfterViewInit, OnInit{
   ngOnInit(): void {
     this.actvRoute.data.subscribe(
       data => {
-        this.myResolverData = data['server']['data'];
+        this.myResolverData = data['server'];
       }
     );
   }
