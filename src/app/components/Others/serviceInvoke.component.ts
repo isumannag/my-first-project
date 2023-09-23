@@ -7,11 +7,11 @@ import { ExampleService } from "src/app/service/my.service";
 @Component({
     selector: 'app-myapp',
     template: `
-        <p>Data came from service: {{updatedData}}</p>
+        <p>Data came from service: {{updatedData|async}}</p>
     `
 })
 export class ServiceInvokedComponent implements OnInit, CanComponentDeactivate{    
-    public updatedData = {};
+    updatedData:any;
     constructor(private myService: ExampleService, private route: Router, private actvRoute: ActivatedRoute){}
 
     public wantToLeaveThePage: boolean = false;
@@ -21,10 +21,7 @@ export class ServiceInvokedComponent implements OnInit, CanComponentDeactivate{
     // constructor() {this.myService = inject(ExampleService);}
 
     ngOnInit() {
-        this.myService.getDummyData().subscribe(
-            successData => this.updatedData = successData.data,
-            errorData => console.log('Service Error!: ', errorData)
-        );
+        this.updatedData = this.myService.getDummyData();
     }
 
     onChangeBtn(){
