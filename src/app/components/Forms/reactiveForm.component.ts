@@ -1,5 +1,7 @@
 import { Component, OnInit } from "@angular/core";
-import { AbstractControl, AsyncValidatorFn, FormArray, FormBuilder, FormControl, FormGroup, ValidationErrors, Validators } from "@angular/forms";
+import { AbstractControl, AsyncValidatorFn, 
+        FormArray, FormControl, FormGroup, 
+        ValidationErrors, Validators } from "@angular/forms";
 import { Observable, catchError, delay, map, of } from "rxjs";
 
 @Component({
@@ -48,7 +50,7 @@ import { Observable, catchError, delay, map, of } from "rxjs";
     ` 
 })
 export class ReactiveFromComponent implements OnInit{
-    constructor(private builder: FormBuilder){}
+    // constructor(private builder: FormBuilder){}
 
     genders = ['male', 'female'];
     myLoginForm: FormGroup;
@@ -64,7 +66,7 @@ export class ReactiveFromComponent implements OnInit{
             }),
 
             // myEmail: new FormControl(null, [Validators.required, Validators.email], [this.forbiddenEmail()]),
-            myEmail: new FormControl(null, { //Async Custor Validator
+            myEmail: new FormControl(null, { //Async Custom Validator
                 validators: [Validators.required, Validators.email], 
                 asyncValidators: [this.forbiddenEmail()]
             }),

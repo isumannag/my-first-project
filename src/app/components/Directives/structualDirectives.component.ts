@@ -10,7 +10,9 @@ import { Component, Directive, Input, TemplateRef, ViewContainerRef } from '@ang
       </ng-template>
 
       <div *ngIf="isValid; else else_content"> "If" content here </div>
-      <ng-template #else_content> "Else" content here </ng-template><br>
+      <ng-template #else_content> "Else" content here </ng-template><br><br>
+
+      <div>ngTemplateOutlet example<p *ngTemplateOutlet="else_content"></p></div><br>
       
     <h3> Angular ngFor demo </h3>
       <ul><li *ngFor="let item of items; let i=index"> Index {{i}} item is {{item}}</li></ul><br>
@@ -27,7 +29,7 @@ import { Component, Directive, Input, TemplateRef, ViewContainerRef } from '@ang
         <div *ngSwitchDefault>Default Template - Value not equals to 1, 2, 3</div>
       </div><br>
 
-    <h3> My Custor Structural Directive </h3>
+    <h3> My Custom Structural Directive </h3>
       <p *appUnless="myValid"> my custom condition </p>
 
   `
@@ -47,7 +49,6 @@ export class MyConditionDirective{
   constructor(private tmplRef: TemplateRef<any>, private vcRef: ViewContainerRef){}
 
   @Input() set appUnless(condition: boolean){
-    condition
     if(condition){
       this.vcRef.createEmbeddedView(this.tmplRef);
     } else {

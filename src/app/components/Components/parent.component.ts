@@ -1,21 +1,25 @@
-import { AfterViewInit, ChangeDetectorRef, Component, OnInit, ViewChild } from '@angular/core';
+import { AfterViewInit, ChangeDetectorRef, Component, OnInit, ViewChild, ViewEncapsulation } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { ChildComponent } from './child.component';
 @Component({
   selector: 'app-parent-selector',
   template: `<div class='main'>
               <h1>I'm parent component</h1>
+              
               <app-child-selector 
                 [parentValueAlias]='messagePassing'
                 (callParent)="getMsgFromBaby($event)"
-                >ng-contenct example</app-child-selector>
-                <p>{{babyMessageFromOutput}}</p>
-                <p>{{babyMessageFromView}}</p><br><br>
+              > 
+                <div style="color:red">ng-contenct example</div>
+              </app-child-selector>
 
-                <p>{{myResolverData}} : Data passing through resolver of Router</p>
+              <p>{{babyMessageFromOutput}}</p>
+              <p>{{babyMessageFromView}}</p><br><br>
+
+              <p>{{myResolverData}} : Data passing through resolver of Router</p>
              </div>
             `,
-  styles: [`div.main{border:1px solid; padding: 25px;}`]
+  styles: [`div.main{border:1px solid; padding: 25px}`]
 })
 export class ParentComponent implements AfterViewInit, OnInit{
   messagePassing = 'Passing data from Parent using @Input!';

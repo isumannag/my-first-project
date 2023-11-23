@@ -1,10 +1,13 @@
-import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
+import { Component, EventEmitter, Input, OnInit, Output, ViewEncapsulation } from '@angular/core';
 
 @Component({
   selector: 'app-child-selector',
-  template: `<p>{{parentValue}} <br>
+  template: `<p>{{parentValue}} in the Child<br>
             <ng-content></ng-content></p>`,
-  styles: [`div.main{border:1px solid; padding: 25px;}`]
+  styles: [`p{border:1px solid; padding: 25px; color: blue}`],
+  // encapsulation: ViewEncapsulation.Emulated //Default
+  // encapsulation: ViewEncapsulation.None
+  // encapsulation: ViewEncapsulation.ShadowDom
 })
 export class ChildComponent implements OnInit{
   @Input('parentValueAlias') parentValue: any;
