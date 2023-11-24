@@ -5,7 +5,8 @@ import { ChildComponent } from './child.component';
   selector: 'app-parent-selector',
   template: `<div class='main'>
               <h1>I'm parent component</h1>
-              
+              <a (click)="myClick()" href="javascript:void(0);">Parent Click Event Trigger</a><br><br>
+
               <app-child-selector 
                 [parentValueAlias]='messagePassing'
                 (callParent)="getMsgFromBaby($event)"
@@ -18,7 +19,7 @@ import { ChildComponent } from './child.component';
 
               <p>{{myResolverData}} : Data passing through resolver of Router</p>
              </div>
-            `,
+             `,
   styles: [`div.main{border:1px solid; padding: 25px}`]
 })
 export class ParentComponent implements AfterViewInit, OnInit{
@@ -48,4 +49,6 @@ export class ParentComponent implements AfterViewInit, OnInit{
       }
     );
   }
+
+  myClick(){ alert('Parent Click Event Trigger!!') }
 }
