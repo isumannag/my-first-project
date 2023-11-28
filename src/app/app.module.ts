@@ -1,6 +1,6 @@
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
-import { HttpClientModule } from '@angular/common/http';
+import { HTTP_INTERCEPTORS, HttpClientModule } from '@angular/common/http';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
@@ -15,6 +15,7 @@ import { AuthService } from './guards/auth.service';
 import { AuthGuard } from './guards/auth-guard.service';
 import { CanDeactivateGuard } from './guards/can-deactivate-guard.service';
 import { ServerResolver } from './guards/server-resolver.service';
+import { AuthInterceptorService } from './guards/auth-interseptor.service';
 
 @NgModule({
   declarations: [AppComponent, PageNotFoundComponent],
@@ -30,6 +31,12 @@ import { ServerResolver } from './guards/server-resolver.service';
     OthersModule
   ],
   bootstrap: [AppComponent],
-  providers: [AuthService, AuthGuard, CanDeactivateGuard, ServerResolver]
+  providers: [AuthService, AuthGuard, CanDeactivateGuard, ServerResolver,
+    {
+      provide: HTTP_INTERCEPTORS,
+      useClass: AuthInterceptorService,
+      multi: true
+    }
+  ]
 })
 export class AppModule { }
