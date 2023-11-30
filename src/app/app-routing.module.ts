@@ -59,7 +59,7 @@ const routes: Routes = [
   {path: 'lazy-loading-path',
    loadChildren: () => import('./components/LazyLoading/lazyLoading.module').then(m => m.LazyLoadingModule)
   },
-  {path: '**', component: PageNotFoundComponent, data: {message: 'Page not found'}}
+  {path: '**', component: PageNotFoundComponent, data: {message: 'Page not found'}}  //Wildcard routing
 ];
 
 @NgModule({
