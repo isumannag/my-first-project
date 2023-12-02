@@ -18,6 +18,8 @@ import { CanDeactivateGuard } from './guards/can-deactivate-guard.service';
 import { ServerResolver } from './guards/server-resolver.service';
 import { MyAllFormComponent } from './components/Forms/form.component';
 import { TempletFromGroupComponent } from './components/Forms/templetFormGroup.component';
+import { RxjsOperatorComponent } from './components/Others/rxjsOperator.component';
+import { MicroFrontendComponent } from './components/Others/microFrontend.component';
 const routes: Routes = [
   {path: '', redirectTo: 'home', pathMatch: 'full'},
   {path: 'home', component: HomeComponent},
@@ -27,6 +29,8 @@ const routes: Routes = [
   {path:'pipe', component: PipeComponent},
   {path:'binding', component: BindingComponent},  
   {path:'service', component: ServiceInvokedComponent, canDeactivate: [CanDeactivateGuard]},
+  {path:'rxjs', component: RxjsOperatorComponent},
+  {path:'microforntend', component: MicroFrontendComponent},
   {path:'form', component: MyAllFormComponent,
   children: [
       {path:'', component: TempletFromComponent},
