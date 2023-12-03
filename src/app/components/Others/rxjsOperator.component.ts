@@ -1,5 +1,7 @@
-import { Component} from '@angular/core';
-import { BehaviorSubject, ReplaySubject, Subject } from 'rxjs';
+import { HttpClient } from '@angular/common/http';
+import { Component, OnInit} from '@angular/core';
+import { BehaviorSubject, filter, interval, take,
+        mergeMap, concatMap, switchMap, exhaustMap, forkJoin, tap } from 'rxjs';
 
 @Component({
   selector: 'app-myapp',
@@ -13,11 +15,12 @@ import { BehaviorSubject, ReplaySubject, Subject } from 'rxjs';
   </div><br><br>
 
   <h3> MergeMap vs ConcatMap vs SwitchMap vs ExhaustMap Examples </h3>
+  <div>Response Data: {{responseData?.id}}</div>
 
     
   `
 })
-export class RxjsOperatorComponent {
+export class RxjsOperatorComponent implements OnInit{
   dataArray:number[] = [];
   // mySubhect = new Subject();
   // mySubhect = new ReplaySubject();
@@ -33,5 +36,35 @@ export class RxjsOperatorComponent {
   getMyData(){this.mySubhect.subscribe(
     (data:any) => this.dataArray.push(data));
     console.log('Subscribed!!');
+  }
+
+  // Operator examples
+  constructor(private http: HttpClient){}
+  responseData: any;
+  ngOnInit(): void {
+    let myParams = interval(1000).pipe(take(5),filter(v=> v>0));
+
+    myParams.pipe(
+      mergeMap((id)=>{
+    // concatMap ((id)=>{
+    // switchMap((id)=>{
+    // exhaustMap((id)=>{
+
+      return this.http.get('https://jsonplaceholder.typicode.com/posts/'+id)
+    }))
+    .subscribe((response)=>{
+      console.log(response);
+      this.responseData = response;
+    });
+
+    // ForkJon Example
+    forkJoin([
+      this.http.get('https://jsonplaceholder.typicode.com/posts/1'),
+      this.http.get('https://jsonplaceholder.typicode.com/posts/2'),
+      this.http.get('https://jsonplaceholder.typicode.com/posts/3').pipe(tap(data=>console.log(data))),
+      this.http.get('https://jsonplaceholder.typicode.com/posts/4'),
+      this.http.get('https://jsonplaceholder.typicode.com/posts/5'),
+      this.http.get('https://jsonplaceholder.typicode.com/posts/6')
+    ]).subscribe(allResult=>console.log('All Result from forkjoin: ', allResult));
   }
 }
