@@ -1,7 +1,7 @@
 import { HttpClient } from '@angular/common/http';
 import { Component, OnInit} from '@angular/core';
 import { BehaviorSubject, filter, interval, take,
-        mergeMap, concatMap, switchMap, exhaustMap, forkJoin, tap } from 'rxjs';
+        mergeMap, concatMap, switchMap, exhaustMap, forkJoin, tap, delay } from 'rxjs';
 
 @Component({
   selector: 'app-myapp',
@@ -61,7 +61,8 @@ export class RxjsOperatorComponent implements OnInit{
     forkJoin([
       this.http.get('https://jsonplaceholder.typicode.com/posts/1'),
       this.http.get('https://jsonplaceholder.typicode.com/posts/2'),
-      this.http.get('https://jsonplaceholder.typicode.com/posts/3').pipe(tap(data=>console.log(data))),
+      this.http.get('https://jsonplaceholder.typicode.com/posts/3').pipe(
+        delay(7000),tap(data=>console.log(data))),
       this.http.get('https://jsonplaceholder.typicode.com/posts/4'),
       this.http.get('https://jsonplaceholder.typicode.com/posts/5'),
       this.http.get('https://jsonplaceholder.typicode.com/posts/6')
