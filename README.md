@@ -1,6 +1,18 @@
 # MyFirstProject
 
-This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 14.0.1.
+## Topic Covered:
+
+1. Basic and Nested Components. Data passing between them
+2. Property binding
+3. Structural Directives
+4. Attribute Directives
+5. Pipe
+6. Forms
+7. Routing
+8. Services & DI
+9. Lazy Loading 
+10. Rxjs Operator
+11. Micro Frontend
 
 ## Development server
 
