@@ -4,18 +4,30 @@ import { Component, Directive, Input, TemplateRef, ViewContainerRef } from '@ang
   selector: 'app-myapp',
   template: `
     <h3> Angular ngIf demo </h3>
-      <p *ngIf="isValid"> isValid variable value is 'true' </p>
+      <div *ngIf="isValid"> isValid variable value is 'true' </div>
       <ng-template [ngIf]="!isValid">
-        <p> isValid variable value is 'false' (behind the *ngIf) </p>
+        <div> isValid variable value is 'false' (behind the *ngIf) </div>
       </ng-template>
 
       <div *ngIf="isValid; else else_content"> "If" content here </div>
-      <ng-template #else_content> "Else" content here </ng-template><br><br>
+      <ng-template #else_content> "Else" content here </ng-template><br>
+
+      <div *ngIf="isValid; then thenBlock else elseBlock"></div>
+        <ng-template #thenBlock>
+          "If" content here through ThenBlock
+        </ng-template>
+        <ng-template #elseBlock>
+          "Else" content here through ElseBlock
+        </ng-template><br><br>
 
       <div>ngTemplateOutlet example<p *ngTemplateOutlet="else_content"></p></div><br>
       
     <h3> Angular ngFor demo </h3>
-      <ul><li *ngFor="let item of items; let i=index"> Index {{i}} item is {{item}}</li></ul><br>
+      <!-- <ul><li *ngFor="let item of items; let i=index"> Index {{i}} item is {{item}}</li></ul><br> -->
+      <ul><li *ngFor="let item of items; index as i; first as f"> 
+        Index {{i}} item -  First {{f}} |
+        <span style="color: red">{{item.item}}</span> <span>{{item.itemvalue}}</span> </li>
+      </ul><br>
 
     <h3> Angular ngSwitch demo </h3>
       <button (click)="value=1" type="button" class="btn btn-primary"> Select - 1 </button>
@@ -38,7 +50,14 @@ export class SrtucturalDirectiveComponent {
   value = 0;
   isValid = false;
   myValid = true;
-  items = ['First', 'Second', 'Third'];
+  items = [
+    {item: 'index: number', itemvalue: ': The index of the current item in the iterable.'},
+    {item: 'count: number', itemvalue: ': The length of the iterable.'},
+    {item: 'first: boolean', itemvalue: ': True when the item is the first item in the iterable.'},
+    {item: 'last: boolean', itemvalue: ': True when the item is the last item in the iterable.'},
+    {item: 'even: boolean', itemvalue: ': True when the item has an even index in the iterable.'},
+    {item: 'odd: boolean', itemvalue: ': True when the item has an odd index in the iterable.'}    
+  ];
 }
 
 // Custom structural Directive

@@ -67,7 +67,7 @@ const routes: Routes = [
 ];
 
 @NgModule({
-  // imports: [RouterModule.forRoot(routes, {useHash: true})],   This to swith on # in the router url
+  // imports: [RouterModule.forRoot(routes, {useHash: true})],   This to swith on # in the router url to support older browser (older than HTML5)
   imports: [RouterModule.forRoot(routes)],
   exports: [RouterModule]
 })

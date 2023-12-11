@@ -7,11 +7,14 @@ import { ExampleService } from "src/app/service/my.service";
 @Component({
     selector: 'app-myapp',
     template: `
-        <p>Data came from service: {{updatedData|async}}</p>
+        <p>Data came from service: {{updatedData$|async}}</p>
+        
+        <p *ngIf="updatedData$ | async as myData; else loading">*ngIf with alias name example: {{myData}}</p>
+        <ng-template #loading>Loading user info...</ng-template>
     `
 })
 export class ServiceInvokedComponent implements OnInit, CanComponentDeactivate{    
-    updatedData:any;
+    updatedData$:any;
     constructor(private myService: ExampleService, private route: Router, private actvRoute: ActivatedRoute){}
 
     public wantToLeaveThePage: boolean = false;
@@ -21,7 +24,7 @@ export class ServiceInvokedComponent implements OnInit, CanComponentDeactivate{
     // constructor() {this.myService = inject(ExampleService);}
 
     ngOnInit() {
-        this.updatedData = this.myService.getDummyData();
+        this.updatedData$ = this.myService.getDummyData();
     }
 
     onChangeBtn(){
