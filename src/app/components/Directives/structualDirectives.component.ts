@@ -20,6 +20,12 @@ import { Component, Directive, Input, TemplateRef, ViewContainerRef } from '@ang
           "Else" content here through ElseBlock
         </ng-template><br><br>
 
+      @if (isValid) {
+        <div> 'New at ifSyntax' 'true' (behind the *ngIf) </div>
+      } @else {
+        <div> 'New at ifSyntax' 'false' (behind the *ngIf) </div>
+      }
+
       <div>ngTemplateOutlet example<p *ngTemplateOutlet="else_content"></p></div><br>
       
     <h3> Angular ngFor demo </h3>
